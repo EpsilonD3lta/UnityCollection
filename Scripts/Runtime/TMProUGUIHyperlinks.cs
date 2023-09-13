@@ -78,7 +78,7 @@ public class TMProUGUIHyperlinks : MonoBehaviour, IPointerDownHandler, IPointerU
             SetLinkColor(linkIndex, usedHoveredColor);
             startColors.ForEach(c => c[0] = c[1] = c[2] = c[3] = usedColor);
             usedLinks[linkIndex] = true;
-            if (linkEvent == null)
+            if (linkEvent == null || linkEvent.GetPersistentEventCount() == 0)
                 Application.OpenURL(linkInfo.GetLinkID());
             else linkEvent.Invoke(linkInfo.GetLinkID());
         }
