@@ -12,7 +12,8 @@ public class TMProWarpText : MonoBehaviour
     [SerializeField]
     private TMP_Text text;
 
-    public AnimationCurve vertexCurve;
+    public AnimationCurve vertexCurve = new AnimationCurve(
+            new Keyframe(0, 0, 0, 30, 0, 0.01f), new Keyframe(0.5f, 0.25f), new Keyframe(1, 0, -30, 0, 0.01f, 0));
     public float yCurveScaling = 100f;
 
     private bool isForceUpdatingMesh;
