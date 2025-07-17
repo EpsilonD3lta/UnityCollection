@@ -5,7 +5,7 @@ using UnityEditor.Presets;
 //Modified from: https://docs.unity3d.com/Manual/DefaultPresetsByFolder.html
 public class PresetImportPerFolder : AssetPostprocessor
 {
-    void OnPreprocessAsset()
+    private void OnPreprocessAsset()
     {
         // Make sure we are applying presets the first time an asset is imported.
         if (assetImporter.importSettingsMissing)
