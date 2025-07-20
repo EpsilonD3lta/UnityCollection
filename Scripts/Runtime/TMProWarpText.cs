@@ -1,16 +1,15 @@
-using System;
 using TMPro;
 #if UNITY_EDITOR
 
 #endif
 using UnityEngine;
 
+// Could also be done with BaseMeshEffect for UI as in Unity UIExtensions repository
 /// <summary> Adapted from TMPro examples and extras provided by Unity </summary>
 [ExecuteAlways]
 public class TMProWarpText : MonoBehaviour
 {
-    [SerializeField]
-    private TMP_Text text;
+    [SerializeField] private TMP_Text text;
 
     public AnimationCurve vertexCurve = new AnimationCurve(
             new Keyframe(0, 0, 0, 30, 0, 0.01f), new Keyframe(0.5f, 0.25f), new Keyframe(1, 0, -30, 0, 0.01f, 0));

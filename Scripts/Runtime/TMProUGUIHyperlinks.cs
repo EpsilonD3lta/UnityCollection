@@ -14,30 +14,24 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class TMProUGUIHyperlinks : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-    [SerializeField]
-    private Color32 hoveredColor = new Color32(0x00, 0x59, 0xFF, 0xFF);
-    [SerializeField]
-    private Color32 pressedColor = new Color32(0x00, 0x00, 0xB7, 0xFF);
-    [SerializeField]
-    private Color32 usedColor = new Color32(0xFF, 0x00, 0xFF, 0xFF);
-    [SerializeField]
-    private Color32 usedHoveredColor = new Color32(0xFD, 0x5E, 0xFD, 0xFF);
-    [SerializeField]
-    private Color32 usedPressedColor = new Color32(0xCF, 0x00, 0xCF, 0xFF);
-    [SerializeField]
-    private LinkEvent linkEvent;
+    [SerializeField] private Color32 hoveredColor = new(0x00, 0x59, 0xFF, 0xFF);
+    [SerializeField] private Color32 pressedColor = new(0x00, 0x00, 0xB7, 0xFF);
+    [SerializeField] private Color32 usedColor = new(0xFF, 0x00, 0xFF, 0xFF);
+    [SerializeField] private Color32 usedHoveredColor = new(0xFD, 0x5E, 0xFD, 0xFF);
+    [SerializeField] private Color32 usedPressedColor = new(0xCF, 0x00, 0xCF, 0xFF);
+    [SerializeField] private LinkEvent linkEvent;
 
     [Serializable]
     public class LinkEvent : UnityEvent<string> { }
 
-    private List<Color32[]> startColors = new List<Color32[]>();
+    private List<Color32[]> startColors = new();
     private TextMeshProUGUI textMeshPro;
-    private Dictionary<int, bool> usedLinks = new Dictionary<int, bool>();
+    private Dictionary<int, bool> usedLinks = new();
     private int hoveredLinkIndex = -1;
     private int pressedLinkIndex = -1;
     private Camera mainCamera;
 
-    void Awake()
+    private void Awake()
     {
         textMeshPro = GetComponent<TextMeshProUGUI>();
 

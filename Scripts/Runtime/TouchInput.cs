@@ -32,18 +32,19 @@ public class TouchInput : MonoBehaviour
     public event Action<Finger> touchStarted, touchStayed, touchMoved, touchEnded;
     public event Action<Finger> dragStarted, dragged, dragEnded;
 
-    private Dictionary<int, Finger> fingers = new Dictionary<int, Finger>();
-    private Dictionary<int, Finger> drags = new Dictionary<int, Finger>();
+    private Dictionary<int, Finger> fingers = new();
+    private Dictionary<int, Finger> drags = new();
 
     private void Update()
     {
         for (int i = 0; i < Input.touchCount; i++)
         {
             var touch = Input.GetTouch(i);
+            Finger finger;
             switch (touch.phase)
             {
                 case TouchPhase.Began:
-                    var finger = new Finger()
+                    finger = new Finger()
                     {
                         pressPosition = touch.position,
                         touch = touch
@@ -67,9 +68,18 @@ public class TouchInput : MonoBehaviour
                     break;
                 case TouchPhase.Ended:
                 case TouchPhase.Canceled:
-                    finger = fingers[touch.fingerId];
-                    finger.touch = touch;
+                    // Touch can be sometimes cancelled without Began phase happening
+                    if (!fingers.TryGetValue(touch.fingerId, out finger))
+                    {
+                        finger = new Finger()
+                        {
+                            pressPosition = touch.position,
+                            touch = touch
+                        };
+                    }
+                    else finger.touch = touch;
                     touchEnded?.Invoke(finger);
+                    finger.InvokeTouchEnded();
                     if (drags.ContainsKey(touch.fingerId))
                     {
                         dragEnded?.Invoke(drags[touch.fingerId]);
