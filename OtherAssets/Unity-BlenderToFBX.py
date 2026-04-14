@@ -37,6 +37,7 @@ if blender280:
         use_selection=False,
         use_active_collection=False,
         # Custom code (maybe will not work with animated objects)
+        use_visible=True,
         bake_space_transform=False,
         use_space_transform=False,
         axis_forward = 'Y',
